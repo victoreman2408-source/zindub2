@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZINDUB Power Rangers - Dino Fury</title>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="shortcut icon" href="https://images-ext-1.discordapp.net/external/05RobE2qnFmwWWe283iNCsDVLzo1xZspKxpcgvc5zAY/https/i.imgur.com/XWlaPplh.jpg?format=webp&width=930&height=930"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Monoton&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+<style>
+    .interactions-wrapper { max-width: 800px; margin: 40px auto; padding: 20px; font-family: 'Poppins', sans-serif; color: #f3f3f3; border-top: 1px solid #2b2f38; }
+    .like-btn { background-color: #2b2f38; color: #f3f3f3; border: none; padding: 10px 20px; border-radius: 20px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; margin-bottom: 30px; }
+    .like-btn.liked { background-color: #e70634; }
+    .comments-area h3 { font-size: 18px; margin-bottom: 15px; font-weight: 500; }
+    .comment-input-group { display: flex; gap: 10px; margin-bottom: 25px; }
+    .comment-input-group input { flex: 1; padding: 12px 15px; border-radius: 20px; border: none; background-color: #2b2f38; color: white; outline: none; font-family: 'Poppins', sans-serif; }
+    .comment-input-group button { background-color: #e70634; color: white; border: none; padding: 0 25px; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; transition: 0.2s; }
+    .comment-list { display: flex; flex-direction: column; gap: 15px; }
+    .comment-item { background-color: #1a1c23; padding: 15px; border-radius: 10px; font-size: 14px; color: #b3b3b3; border: 1px solid #2b2f38; }
+    .comment-item strong { color: #f3f3f3; display: block; margin-bottom: 5px; font-weight: 500; }
+</style>
+</head>
+
+<body>
+
+    <div id="progress"><span id="progress-value"></span></div>
+
+    <nav class="navigation">
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon"><span class="nav-icon"></span></label>
+        <a href="index.html" class="logo">Zindub<span>Fandub</span></a>
+        <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Filmes</a></li>
+            <li><a href="series.html">Séries</a></li>
+            <li><a href="videoscurtos.html">Vídeos curtos</a></li>
+            <li><a href="ao-vivo.html">Zindub TV</a></li>
+            <li><a href="contato.html">Sobre e Contato</a></li>
+            <li><a href="anuncio.html">Anúncios</a></li>
+            <li><a href="parceiros.html">Projetos Parceiros</a></li>
+        </ul>
+    </nav>
+
+    <section class="movie-banner">
+        <div class="m-banner-img"><img src="Imagens/MV5BMzJiZDhlM2ItYTk1MS00ZTllLThhM2UtNWE3YjE0MzFkNDM0XkEyXkFqcGc._V1_QL75_UX388_.jpg" alt=""></div>
+        <div class="banner-container">
+            <div class="title-container">
+                <div class="title-top">
+                    <div class="movie-title"><h1>Power Rangers - Dino Fury</h1></div>
+                    <div class="more-about-movie"><span class="quality">Fandublado</span></div>
+                    <div class="language"><span>Série</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="movie-details">
+        <strong>Assista aos episódios abaixo</strong>
+    </section>
+
+    <section class="download-movie">
+        <div class="download-container">
+            <div class="download-box">
+                <span><i class="fas fa-server"></i> Episódio 2</span>
+                <a href="https://drive.google.com/file/d/1-9vyCDyI8quQDTDVNHTcosMblAncd1tP/view?usp=sharing">Assistir</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Área de Interação -->
+    <div class="interactions-wrapper">
+        <button id="likeButton" class="like-btn" onclick="toggleLike()">
+            <i class="fa-regular fa-heart" id="likeIcon"></i> <span id="likeCount">0</span> Curtidas
+        </button>
+        <div class="comments-area">
+            <h3>Comentários (<span id="commentCount">0</span>)</h3>
+            <div class="comment-input-group">
+                <input type="text" id="commentInput" placeholder="Adicione um comentário..." onkeypress="handleEnter(event)">
+                <button onclick="addComment()">Enviar</button>
+            </div>
+            <div id="commentList" class="comment-list"></div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="index.html" class="logo">Zindub<span>Fandub</span></a>
+        <span class="copyright">Desde 2021 - Todos os direitos reservados aos donos das obras. Sem fins lucrativos.</span>
+    </footer>
+
+    <script src="js/jQuery.js"></script>
+    <script>
+        let scrollPercentage = () => {
+            let scrollProgress = document.getElementById("progress");
+            let pos = document.documentElement.scrollTop;
+            let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrollValue = Math.round(pos * 100 / calcHeight);
+            if(scrollProgress) scrollProgress.style.background = `conic-gradient(#e70634 ${scrollValue}%, #2b2f38 ${scrollValue}%)`;
+        }
+        window.onscroll = scrollPercentage; window.onload = scrollPercentage;
+        $(window).scroll(function(){
+            if($(document).scrollTop() > 20) $('.navigation').addClass('fix-icon');
+            else $('.navigation').removeClass('fix-icon');
+        });
+    </script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, updateDoc, setDoc, increment, collection, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyBPaNeovud2uYjIcNEdLkNsSl4YMjKp_Xw", authDomain: "zindub-e2ff7.firebaseapp.com", projectId: "zindub-e2ff7", storageBucket: "zindub-e2ff7.firebasestorage.app", messagingSenderId: "169563902252", appId: "1:169563902252:web:5c7e2c215189c6b1e61c89", measurementId: "G-3D22LE4B0K" };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // ID ÚNICO PARA ESTA SÉRIE
+    const pageId = "dinofury";
+
+    // --- SISTEMA DE CURTIDAS ---
+    const likeDocRef = doc(db, "stats", pageId);
+    let hasLiked = localStorage.getItem(pageId + 'HasLiked') === 'true';
+    const likeBtn = document.getElementById('likeButton');
+    const likeIcon = document.getElementById('likeIcon');
+    
+    if(likeBtn) {
+        if(hasLiked) { likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid'); }
+
+        onSnapshot(likeDocRef, (docSnap) => {
+            if (docSnap.exists()) { document.getElementById('likeCount').innerText = docSnap.data().likes; }
+            else { setDoc(likeDocRef, { likes: 0 }); }
+        });
+
+        window.toggleLike = async function() {
+            if (!hasLiked) {
+                hasLiked = true; localStorage.setItem(pageId + 'HasLiked', 'true');
+                likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid');
+                await updateDoc(likeDocRef, { likes: increment(1) });
+            } else {
+                hasLiked = false; localStorage.setItem(pageId + 'HasLiked', 'false');
+                likeBtn.classList.remove('liked'); likeIcon.classList.replace('fa-solid', 'fa-regular');
+                await updateDoc(likeDocRef, { likes: increment(-1) });
+            }
+        };
+    }
+
+    // --- SISTEMA DE COMENTÁRIOS ---
+    const commentsRef = collection(db, pageId + "Comments");
+    onSnapshot(query(commentsRef, orderBy("timestamp", "desc")), (snapshot) => {
+        const list = document.getElementById('commentList');
+        if(!list) return;
+        document.getElementById('commentCount').innerText = snapshot.docs.length;
+        list.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+            const comment = docSnap.data();
+            list.innerHTML += `
+                <div class="comment-item" style="display:flex; align-items:center; gap:10px;">
+                    <img src="${comment.avatar}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                    <div>
+                        <strong style="display:block; color:#f3f3f3;">${comment.name}</strong>
+                        ${comment.text}
+                    </div>
+                </div>`;
+        });
+    });
+
+    window.addComment = async function() {
+        const user = JSON.parse(localStorage.getItem('zindub_user'));
+        if (!user) return alert("Por favor, finalize seu perfil primeiro!");
+        
+        const input = document.getElementById('commentInput');
+        const text = input.value.trim();
+        if (text !== "") {
+            await addDoc(commentsRef, {
+                name: user.name,
+                avatar: user.avatar,
+                text: text,
+                timestamp: serverTimestamp()
+            });
+            input.value = "";
+        }
+    };
+
+    window.handleEnter = function(event) { if (event.key === 'Enter') window.addComment(); };
+</script>
+</body><script src="js/auth.js"></script>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projetos Parceiros</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+   
+
+    <style>
+
+        :root {
+
+            --bg-color: #040D12;
+
+            --text-color: #f3f3f3;
+
+            --accent-color: #C63C51;
+
+            --gray-light: #b3b3b3;
+
+            --gray-dark: #2b2b2b;
+
+        }
+
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family: 'Poppins', sans-serif;
+
+            text-decoration: none;
+
+            -webkit-tap-highlight-color: transparent;
+
+        }
+
+
+
+        body {
+
+            background-color: var(--bg-color);
+
+            color: var(--text-color);
+
+            display: flex;
+
+            justify-content: center;
+
+        }
+
+
+
+        .app-container {
+
+            width: 100%;
+
+            max-width: 480px;
+
+            min-height: 100vh;
+
+            background-color: var(--bg-color);
+
+            position: relative;
+
+        }
+
+
+
+        /* --- Trailer do Topo --- */
+
+        .trailer-container {
+
+            width: 100%;
+
+            height: 250px;
+
+            position: relative;
+
+            background-color: #000;
+
+            overflow: hidden;
+
+        }
+
+        .trailer-video { width: 100%; height: 100%; object-fit: cover; }
+
+
+
+        /* --- Conteúdo Principal --- */
+
+        .content {
+
+            padding: 15px;
+
+            margin-top: -15px;
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+
+        .title { font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+
+
+
+        .meta-info {
+
+            display: flex; align-items: center; gap: 10px;
+
+            font-size: 14px; color: var(--gray-light); margin-bottom: 15px;
+
+        }
+
+
+
+        .synopsis { margin-bottom: 15px; line-height: 1.5; }
+
+
+
+        /* --- Selo Netflix --- */
+
+        .new-episodes-badge {
+
+            display: inline-flex; align-items: center; gap: 8px;
+
+            background-color: var(--accent-color); color: #fff;
+
+            padding: 6px 12px; border-radius: 4px; font-size: 13px;
+
+            font-weight: 600; margin-bottom: 15px; text-transform: uppercase;
+
+        }
+
+
+
+        .cast { font-size: 13px; color: var(--gray-light); margin-bottom: 20px; line-height: 1.6; }
+
+
+
+        .actions-row { display: flex; gap: 35px; padding: 0 10px; margin-bottom: 25px; }
+
+        .action-item {
+
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+
+            color: var(--gray-light); cursor: pointer; background: none; border: none;
+
+        }
+
+        .action-item i { font-size: 24px; color: var(--text-color); }
+
+
+
+        /* --- Curtidas e Comentários Visual --- */
+
+        .interactions-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #333; margin-bottom: 20px;}
+
+        .like-btn {
+
+            background-color: var(--gray-dark); color: var(--text-color);
+
+            border: none; padding: 10px 20px; border-radius: 20px; font-size: 15px;
+
+            cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s;
+
+        }
+
+        .like-btn.liked { background-color: var(--accent-color); }
+
+       
+
+        .comments-area { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; }
+
+        .comment-input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+
+        .comment-input-group input {
+
+            flex: 1; padding: 10px 15px; border-radius: 20px; border: none;
+
+            background-color: var(--gray-dark); color: white; outline: none;
+
+        }
+
+        .comment-input-group button {
+
+            background-color: var(--accent-color); color: white; border: none;
+
+            padding: 0 20px; border-radius: 20px; cursor: pointer; font-weight: bold;
+
+        }
+
+        .comment-list { display: flex; flex-direction: column; gap: 15px; }
+
+        .comment-item { background-color: #1a1a1a; padding: 12px; border-radius: 8px; font-size: 13px; color: var(--gray-light); }
+
+        .comment-item strong { color: var(--text-color); display: block; margin-bottom: 5px; }
+
+
+
+        /* --- Episódios --- */
+
+        .tabs { display: flex; gap: 20px; border-bottom: 1px solid #333; margin-bottom: 20px; }
+
+        .tab { padding-bottom: 10px; font-weight: 600; font-size: 15px; color: var(--gray-light); cursor: pointer; }
+
+        .tab.active { color: var(--text-color); border-bottom: 4px solid var(--accent-color); }
+
+
+
+        .season-selector {
+
+            background-color: var(--gray-dark); color: var(--text-color);
+
+            border: none; padding: 8px 35px 8px 15px; border-radius: 4px;
+
+            margin-bottom: 15px; cursor: pointer; outline: none;
+
+        }
+
+
+
+        .season-content { display: none; }
+
+        .season-content.active { display: block; }
+
+        .episode-list-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: #fff; }
+
+        .ep-thumbnail { width: 130px; height: 75px; background-color: #333; background-size: cover; background-position: center; border-radius: 4px; display: flex; justify-content: center; align-items: center; }
+
+        .ep-info h4 { font-size: 14px; color: var(--text-color); }
+
+        .ep-info p { font-size: 12px; color: var(--gray-light); }
+
+
+
+        /* Ajuste do botão */
+
+        .back-to-top-container { margin: 30px 0; text-align: center; }
+
+        .btn-top {
+
+            display: inline-flex; align-items: center; gap: 10px;
+
+            background-color: var(--gray-dark); color: var(--text-color);
+
+            padding: 12px 25px; border-radius: 25px; font-weight: 500;
+
+            font-size: 14px; border: 1px solid #444; transition: 0.3s;
+
+        }
+
+        .btn-top:hover { background-color: var(--accent-color); border-color: var(--accent-color); }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div class="app-container">
+
+       
+
+        <div class="trailer-container">
+
+            <video class="trailer-video" controls playsinline autoplay muted poster="Imagens/file_00000000b83c71f59d1c9bdcb767b6d6.png">
+
+                <source src="" type="video/mp4">
+
+            </video>
+
+        </div>
+
+
+
+        <div class="content">
+
+           
+
+            <h1 class="title">Shaman King</h1>
+
+           
+
+            <div class="meta-info">
+
+                <span>2021</span>
+
+                <span>1 Temporada</span>
+
+            </div>
+
+
+
+            <p class="synopsis">Assista aos episódios de Shaman King Fandublado pelo estúdio Aladub</p>
+
+           
+
+            <div class="new-episodes-badge">
+
+                <i class="fa-solid fa-bell"></i> Episódios 1 a 6 Disponíveis
+
+            </div>
+
+           
+
+            <div class="cast-container" style="color: #f3f3f3; font-family: 'Poppins', sans-serif; margin-top: 20px;">
+
+                <strong style="color: #C63C51;">Elenco:</strong>
+
+                <div style="margin-top: 10px; line-height: 1.8;">
+
+                    <div>AkiraYui - Yoh Asakura</div>
+
+                    <div>Ayumi - Ana Itako</div>
+
+                    <div>Caio - Manta</div>
+
+                    <div>Joabem - Ryu</div>
+
+                    <div>Eduardo - Amidamaru</div>
+
+                    <div>Abraão - Tao Ren</div>
+
+                    <div>Iasmin - Tao Jun</div>
+
+                    <div>Mauro - Tokagero</div>
+
+                    <div>Pedro - Horohoro</div>
+
+                    <div>Soares - Pirika</div>
+
+                    <div>Acaiah - Grande Chefe</div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="actions-row">
+
+                <button class="action-item" onclick="alert('Para compartilhar esta pagina de Aladub, copie o link do navegador!')">
+
+                    <i class="fa-solid fa-share-nodes"></i>
+
+                    <span>Compartilhar</span>
+
+                </button>
+
+            </div>
+
+
+
+            <div class="interactions-section">
+
+                <button id="likeButton" class="like-btn" onclick="toggleLike()">
+
+                    <i class="fa-regular fa-heart" id="likeIcon"></i>
+
+                    <span id="likeCount">198</span> Curtidas
+
+                </button>
+
+            </div>
+
+
+
+            <div class="tabs">
+
+                <div class="tab active">Episódios</div>
+
+            </div>
+
+
+
+            <select id="seasonSelector" class="season-selector" onchange="changeSeason()">
+
+                <option value="1">Temporada 1</option>
+
+            </select>
+
+
+
+            <div id="season1" class="season-content active">
+
+                <a href="filmes/ep1shaman.mp4" class="episode-list-item">
+
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep1shaman.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                    <div class="ep-info"><h4>1. O Garoto que Dança com os Fantasmas</h4><p>24 min</p></div>
+
+                </a>
+
+                <a href="filmes/ep2shaman.mp4" class="episode-list-item">
+
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep2shaman.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                    <div class="ep-info"><h4>2. O outro Shaman</h4><p>24 min</p></div>
+
+                </a>
+
+                <a href="filmes/taojun.mp4" class="episode-list-item">
+
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep3shaman.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                    <div class="ep-info"><h4>3. Tao Jun</h4><p>24 min</p></div>
+
+                </a>
+
+                <a href="filmes/ep4.mp4" class="episode-list-item">
+
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep4shaman.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                    <div class="ep-info"><h4>4. O melhor lugar</h4><p>24 min</p></div>
+
+                </a>
+
+                <a href="https://ia902809.us.archive.org/23/items/05-over-soul_202607/05%20-%20Over%20Soul.mp4" class="episode-list-item">
+
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep5shaman.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                    <div class="ep-info"><h4>5. Over Soul!</h4><p>24 min</p></div>
+
+                </a>
+
+            </div>
+
+            <a href="https://ia903107.us.archive.org/12/items/06-horo-horo/06-Horo%20horo.mp4" class="episode-list-item">
+
+                <div class="ep-thumbnail" style="background-image: url('Imagens/Screenshot_20260712_225252_Drive.jpg');"><i class="fa-solid fa-play"></i></div>
+
+                <div class="ep-info"><h4>6. Horo Horo</h4><p>24 min</p></div>
+
+            </a>
+
+
+
+            <!-- ÁREA DE COMENTÁRIOS -->
+
+            <div class="comments-area">
+
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Comentários (<span id="commentCount">0</span>)</h3>
+
+                <div class="comment-input-group">
+
+                    <input type="text" id="commentInput" placeholder="Adicione um comentário..." onkeypress="handleEnter(event)">
+
+                    <button onclick="addComment()">Enviar</button>
+
+                </div>
+
+                <div id="commentList" class="comment-list">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="back-to-top-container">
+
+                <a href="projetos.html" class="btn-top">
+
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para projetos
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        function changeSeason() {
+
+            const selectedSeason = document.getElementById("seasonSelector").value;
+
+            document.querySelectorAll(".season-content").forEach(season => season.classList.remove("active"));
+
+            const activeSeason = document.getElementById("season" + selectedSeason);
+
+            if (activeSeason) activeSeason.classList.add("active");
+
+        }
+
+    </script>
+
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, updateDoc, setDoc, increment, collection, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyBPaNeovud2uYjIcNEdLkNsSl4YMjKp_Xw", authDomain: "zindub-e2ff7.firebaseapp.com", projectId: "zindub-e2ff7", storageBucket: "zindub-e2ff7.firebasestorage.app", messagingSenderId: "169563902252", appId: "1:169563902252:web:5c7e2c215189c6b1e61c89", measurementId: "G-3D22LE4B0K" };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const pageId = "shaman";
+
+    // --- SISTEMA DE CURTIDAS ---
+    const likeDocRef = doc(db, "stats", pageId);
+    let hasLiked = localStorage.getItem(pageId + 'HasLiked') === 'true';
+    const likeBtn = document.getElementById('likeButton');
+    const likeIcon = document.getElementById('likeIcon');
+    
+    if(likeBtn) {
+        if(hasLiked) { likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid'); }
+
+        onSnapshot(likeDocRef, (docSnap) => {
+            if (docSnap.exists()) { document.getElementById('likeCount').innerText = docSnap.data().likes; }
+            else { setDoc(likeDocRef, { likes: 119 }); }
+        });
+
+        window.toggleLike = async function() {
+            if (!hasLiked) {
+                hasLiked = true; localStorage.setItem(pageId + 'HasLiked', 'true');
+                likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid');
+                await updateDoc(likeDocRef, { likes: increment(1) });
+            } else {
+                hasLiked = false; localStorage.setItem(pageId + 'HasLiked', 'false');
+                likeBtn.classList.remove('liked'); likeIcon.classList.replace('fa-solid', 'fa-regular');
+                await updateDoc(likeDocRef, { likes: increment(-1) });
+            }
+        };
+    }
+
+    // --- SISTEMA DE COMENTÁRIOS ---
+    const commentsRef = collection(db, pageId + "Comments");
+    
+    // Lista com 12 nomes
+    const nomesAleatorios = [
+        "Pedro Henrique", "Ana Clara", "Lucas Gabriel", "Mariana Silva", 
+        "João Vitor", "Beatriz Costa", "Gabriel Souza", "Julia Oliveira", 
+        "Matheus Santos", "Larissa Lima", "Júnior", "Camila Alves"
+    ];
+
+    // Lista com 12 fotos reais e estéticas
+    const avataresAleatorios = [
+        "https://images.unsplash.com/photo-1599598425947-33002620660b?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1585244589711-f18287ea609f?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1563089145-599997674d42?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=150&h=150&fit=crop", 
+        "https://images.unsplash.com/photo-1532767153582-b1a0e5145009?w=150&h=150&fit=crop"  
+    ];
+
+    onSnapshot(query(commentsRef, orderBy("timestamp", "desc")), (snapshot) => {
+        const list = document.getElementById('commentList');
+        if(!list) return;
+        
+        list.innerHTML = "";
+        
+        let dbIndex = 0;
+        let visualIndex = 0;
+
+        snapshot.forEach((docSnap) => {
+            if (dbIndex === 14) {
+                dbIndex++;
+                return;
+            }
+
+            const comment = docSnap.data();
+            let nomeExibicao = comment.name || "Fã Anônimo";
+            let avatarExibicao = comment.avatar || 'https://i.imgur.com/7I9W0p3.png';
+            let textoComentario = comment.text || "";
+
+            // --- REGRA DE EXCEÇÃO PARA O COMENTÁRIO 23 ---
+            // Se NÃO for o comentário 23 (visualIndex === 22), ele aplica as regras.
+            // Se FOR o comentário 23, ele pula tudo isso e mantém o original.
+            if (visualIndex !== 22) {
+                
+                // Substituição a partir do 4º comentário visível (índice 3+)
+                if (visualIndex >= 3 && (nomeExibicao === "Fã Anônimo" || nomeExibicao.trim() === "")) {
+                    nomeExibicao = nomesAleatorios[visualIndex % nomesAleatorios.length];
+                    avatarExibicao = avataresAleatorios[visualIndex % avataresAleatorios.length];
+                }
+
+                // --- REGRA: Matheus Santos, Larissa Lima, Júnior e Dono ---
+                let deveAlterar = false;
+                
+                if (nomeExibicao === "Matheus Santos" || 
+                    nomeExibicao === "Larissa Lima" || 
+                    nomeExibicao === "Júnior" || 
+                    nomeExibicao.toLowerCase() === "dono") { 
+                    
+                    deveAlterar = true;
+                }
+
+                // EXCEÇÃO: Se o texto do comentário conter "muito bom", cancela a alteração
+                if (textoComentario.toLowerCase().includes("muito bom")) {
+                    deveAlterar = false;
+                }
+
+                // Se passou em todas as regras, aplica o nome e a foto do Aladub
+                if (deveAlterar) {
+                    nomeExibicao = "AkiraYui( Aladub)";
+                    avatarExibicao = "Imagens/IMG-20260701-WA0153.jpg";
+                }
+            }
+            // ---------------------------------------------------------------------------
+
+            list.innerHTML += `
+                <div class="comment-item" style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                    <img src="${avatarExibicao}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border: 2px solid #C63C51; background-color: #2b2b2b;">
+                    <div>
+                        <strong style="display:block; color:#e70634;">${nomeExibicao}</strong>
+                        <span style="color:#fff;">${textoComentario}</span>
+                    </div>
+                </div>`;
+            
+            dbIndex++;
+            visualIndex++;
+        });
+
+        document.getElementById('commentCount').innerText = visualIndex;
+    });
+
+    window.addComment = async function() {
+        const user = JSON.parse(localStorage.getItem('zindub_user'));
+        if (!user) return alert("Por favor, finalize seu perfil primeiro!");
+        
+        const input = document.getElementById('commentInput');
+        const text = input.value.trim();
+        if (text !== "") {
+            await addDoc(commentsRef, {
+                name: user.name,
+                avatar: user.avatar,
+                text: text,
+                timestamp: serverTimestamp()
+            });
+            input.value = "";
+        }
+    };
+
+    window.handleEnter = function(event) { if (event.key === 'Enter') window.addComment(); };
+</script>
+</body><script src="js/auth.js"></script>
+
+</html> 
+

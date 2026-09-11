@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zindub Fandub - Parceiros</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="shortcut icon" href="https://images-ext-1.discordapp.net/external/05RobE2qnFmwWWe283iNCsDVLzo1xZspKxpcgvc5zAY/https/i.imgur.com/XWlaPplh.jpg?format=webp&width=930&height=930" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Monoton&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Estilos específicos para a área de Parceiros */
+        .partners-hero {
+            width: 100%;
+            min-height: 500px;
+            background: linear-gradient(rgba(4, 13, 18, 0.8), rgba(4, 13, 18, 0.9)), url('https://i.imgur.com/your-background-image.jpg'); /* Coloque aqui uma imagem de fundo bonita */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 10%;
+            margin-top: 50px;
+        }
+
+        .partners-hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .partners-hero-content h1 {
+            color: #f3f3f3;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .partners-hero-content h1 span {
+            color: #C63C51;
+        }
+
+        .partners-hero-content p {
+            color: #f3f3f3;
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-streaming-parceiros {
+            background-color: #C63C51;
+            color: #f3f3f3;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(198, 60, 81, 0.2);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-streaming-parceiros:hover {
+            background-color: #f3f3f3;
+            color: #040D12;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(198, 60, 81, 0.4);
+        }
+
+        .btn-streaming-parceiros i {
+            font-size: 1.2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="progress">
+        <span id="progress-value"></span>
+    </div>
+
+    <nav class="navigation">
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+        <a href="index.html" class="logo">
+            Zindub<span>Fandub</span>
+        </a>
+
+        <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Filmes</a></li>
+            <li><a href="series.html">Séries</a></li>
+            <li><a href="videoscurtos.html">Videos curtos</a></li>
+            <li><a href="ao-vivo.html">Zindub TV</a></li>
+            <li><a href="contato.html">Sobre e Contato</a></li>
+            <li><a href="anuncio.html">Anúncios</a></li>
+            <li><a href="parceiros.html">Projetos Parceiros</a></li>
+        </ul>
+    </nav>
+
+    <section class="partners-hero">
+        <div class="partners-hero-content">
+            <h1>O Universo dos Nossos <span>Parceiros</span></h1>
+            <p>Descubra novos projetos, fandubs incríveis e criadores de conteúdo que fazem parte da nossa rede. Uma experiência de fandublagem dedicada à comunidade.</p>
+            
+            <a href="projetos.html" class="btn-streaming-parceiros">
+                <i class="fas fa-play"></i> EXPLORAR PROJETOS
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <a href="index.html" class="logo">
+            Zindub<span>Fandub</span>
+        </a>
+        <span class="copyright">
+            Desde 2021 - Todos os direitos reservados aos donos das obras. Sem fins lucrativos.
+        </span>
+    </footer>
+
+    <script src="js/jQuery.js"></script>
+
+    <script>
+        /*==scroll-progress-bar======================*/
+        let scrollPrecentage = () => {
+            let scrollProgress = document.getElementById("progress");
+            let progressValue = document.getElementById("progress-value");
+            let pos = document.documentElement.scrollTop;
+            let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrollValue = Math.round(pos * 100 / calcHeight);
+            scrollProgress.style.background = `conic-gradient(#C63C51 ${scrollValue}%, #2b2f38 ${scrollValue}%)`;
+        }
+        window.onscroll = scrollPrecentage;
+        window.onload = scrollPrecentage;
+
+        /*--menu-btn-fixed-when-scroll============*/
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 20) {
+                $('.navigation').addClass('fix-icon');
+            } else {
+                $('.navigation').removeClass('fix-icon');
+            }
+        });
+    </script>
+
+</body><script src="js/auth.js"></script>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos Parceiros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #040D12;
+            --text-color: #f3f3f3;
+            --accent-color: #C63C51;
+            --gray-light: #b3b3b3;
+            --gray-dark: #2b2b2b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            position: relative;
+        }
+
+        /* --- Trailer do Topo --- */
+        .trailer-container {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            background-color: #000;
+            overflow: hidden;
+        }
+        .trailer-video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- Conteúdo Principal --- */
+        .content {
+            padding: 15px;
+            margin-top: -15px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .title { font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+
+        .meta-info {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 14px; color: var(--gray-light); margin-bottom: 15px;
+        }
+
+        .synopsis { margin-bottom: 15px; line-height: 1.5; }
+
+        /* --- Selo Netflix --- */
+        .new-episodes-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background-color: var(--accent-color); color: #fff;
+            padding: 6px 12px; border-radius: 4px; font-size: 13px;
+            font-weight: 600; margin-bottom: 15px; text-transform: uppercase;
+        }
+
+        .actions-row { display: flex; gap: 35px; padding: 0 10px; margin-bottom: 25px; }
+        .action-item {
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: var(--gray-light); cursor: pointer; background: none; border: none;
+        }
+        .action-item i { font-size: 24px; color: var(--text-color); }
+
+        /* --- Curtidas e Comentários --- */
+        .interactions-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #333; margin-bottom: 20px;}
+        .like-btn {
+            background-color: var(--gray-dark); color: var(--text-color);
+            border: none; padding: 10px 20px; border-radius: 20px; font-size: 15px;
+            cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .like-btn.liked { background-color: var(--accent-color); }
+        
+        .comments-area { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; }
+        .comment-input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .comment-input-group input {
+            flex: 1; padding: 10px 15px; border-radius: 20px; border: none;
+            background-color: var(--gray-dark); color: white; outline: none;
+        }
+        .comment-input-group button {
+            background-color: var(--accent-color); color: white; border: none;
+            padding: 0 20px; border-radius: 20px; cursor: pointer; font-weight: bold;
+        }
+        .comment-list { display: flex; flex-direction: column; gap: 15px; }
+        .comment-item { background-color: #1a1a1a; padding: 12px; border-radius: 8px; font-size: 13px; color: var(--gray-light); }
+        .comment-item strong { color: var(--text-color); display: block; margin-bottom: 5px; }
+
+        /* --- Episódios --- */
+        .tabs { display: flex; gap: 20px; border-bottom: 1px solid #333; margin-bottom: 20px; }
+        .tab { padding-bottom: 10px; font-weight: 600; font-size: 15px; color: var(--text-color); border-bottom: 4px solid var(--accent-color); }
+
+        .season-selector {
+            background-color: var(--gray-dark); color: var(--text-color);
+            border: none; padding: 8px 35px 8px 15px; border-radius: 4px;
+            margin-bottom: 15px; cursor: pointer; outline: none;
+        }
+
+        .season-content { display: none; }
+        .season-content.active { display: block; }
+        .episode-list-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: #fff; }
+        .ep-thumbnail { width: 130px; height: 75px; background-color: #333; background-size: cover; background-position: center; border-radius: 4px; display: flex; justify-content: center; align-items: center; }
+        .ep-info h4 { font-size: 14px; color: var(--text-color); }
+        .ep-info p { font-size: 12px; color: var(--gray-light); }
+
+        .back-to-top-container { margin: 30px 0; text-align: center; }
+        .btn-top {
+            display: inline-flex; align-items: center; gap: 10px;
+            background-color: var(--gray-dark); color: var(--text-color);
+            padding: 12px 25px; border-radius: 25px; font-weight: 500;
+            font-size: 14px; border: 1px solid #444; transition: 0.3s;
+        }
+        .btn-top:hover { background-color: var(--accent-color); border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="trailer-container">
+            <video class="trailer-video" controls playsinline autoplay muted poster="filmes/trailer.mp4">
+                <source src="filmes/trailer.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="content">
+            
+            <h1 class="title">Angels of Death</h1>
+           
+            <div class="meta-info">
+                <span>2018</span>
+                <span>Série</span>
+                <span>1 Temporada</span>
+            </div>
+
+            <p class="synopsis">Assista aos episódios de Angels of Death Fã dublado pelo estúdio Aladub</p>
+           
+
+
+            <div class="new-episodes-badge">
+                <i class="fa-solid fa-bell">Episódio 1 Disponível</i> 
+            </div>
+           
+            <div class="cast-container" style="color: #f3f3f3; font-family: 'Poppins', sans-serif; margin-top: 20px;">
+                <strong style="color: #C63C51;">Elenco:</strong>
+                <div style="margin-top: 10px; line-height: 1.8;">
+                    <div>Rachel Gardner - Soares</div>
+                    <div>Isaac Foster( Zack ) - Pedro Miguel</div>
+                    <div>Daniel Dickens - AkiraYui</div>
+                    <div>Edward Mason - Caio </div>
+                    <div>Catherine Ward - Ayumi</div>
+                    <div>Abraham Gray - Eduardo</div>
+                </div>
+            </div>
+
+            <div class="actions-row">
+                <button class="action-item" onclick="alert('Para compartilhar esta pagina de Aladub, copie o link do navegador!')">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Compartilhar</span>
+                </button>
+            </div>
+
+            <!-- CURTIDAS -->
+            <div class="interactions-section">
+                <button id="likeButton" class="like-btn" onclick="window.toggleLike()">
+                    <i class="fa-regular fa-heart" id="likeIcon"></i>
+                    <span id="likeCount">0</span> Curtidas
+                </button>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active">Episódios</div>
+            </div>
+
+            <select id="seasonSelector" class="season-selector">
+                <option value="1">Temporada 1</option>
+            </select>
+
+            <div id="season1" class="season-content active">
+                <a href="filmes/Satsuriku.mp4" class="episode-list-item">
+                    <div class="ep-thumbnail" style="background-image: url('Imagens/ep1.jpg');"><i class="fa-solid fa-play"></i></div>
+                    <div class="ep-info"><h4>Episódio 1: Me mate, por favor!</h4><p>23 minutos e 40 segundos</p></div>
+                </a>
+            </div>
+
+            <!-- COMENTÁRIOS -->
+            <div class="comments-area">
+                <h3 style="margin-bottom: 15px; font-size: 18px;">Comentários (<span id="commentCount">0</span>)</h3>
+                
+                <div class="comment-input-group">
+                    <input type="text" id="commentInput" placeholder="Adicione um comentário..." onkeypress="window.handleEnter(event)">
+                    <button onclick="window.addComment()">Enviar</button>
+                </div>
+
+                <div id="commentList" class="comment-list">
+                    <!-- Os comentários do Firebase entram aqui dinamicamente -->
+                </div>
+            </div>
+
+            <div class="back-to-top-container">
+                <a href="projetos.html" class="btn-top">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para projetos
+                </a>
+            </div>
+        </div>
+    </div>
+
+<!-- SCRIPT DO FIREBASE (Curtidas com Alternância + Comentários + Admin) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, updateDoc, setDoc, increment, collection, addDoc, query, orderBy, serverTimestamp, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyBPaNeovud2uYjIcNEdLkNsSl4YMjKp_Xw", authDomain: "zindub-e2ff7.firebaseapp.com", projectId: "zindub-e2ff7", storageBucket: "zindub-e2ff7.firebasestorage.app", messagingSenderId: "169563902252", appId: "1:169563902252:web:5c7e2c215189c6b1e61c89", measurementId: "G-3D22LE4B0K" };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        const pageId = "angels_of_death"; 
+        const ADMIN_EMAIL = "victoreman340@gmail.com"; 
+        const storageKey = `liked_${pageId}`;
+
+        // --- CURTIDAS ---
+        const likeDocRef = doc(db, "stats", pageId);
+        
+        onSnapshot(likeDocRef, async (docSnap) => { 
+            if (docSnap.exists()) { 
+                document.getElementById('likeCount').innerText = docSnap.data().likes || 0; 
+            } else {
+                await setDoc(likeDocRef, { likes: 0 });
+            }
+        });
+
+        // Aplica o estilo visual ao carregar se já estiver curtido
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem(storageKey) === 'true') {
+                const btn = document.getElementById('likeButton');
+                const icon = document.getElementById('likeIcon');
+                if (btn) btn.classList.add('liked');
+                if (icon) {
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                }
+            }
+        });
+
+        window.toggleLike = async function() {
+            const btn = document.getElementById('likeButton');
+            const icon = document.getElementById('likeIcon');
+            const isAlreadyLiked = localStorage.getItem(storageKey) === 'true';
+
+            try {
+                const docSnap = await getDoc(likeDocRef);
+                let currentLikes = 0;
+                
+                if (docSnap.exists()) {
+                    currentLikes = docSnap.data().likes || 0;
+                }
+
+                if (isAlreadyLiked) {
+                    // Tira a curtida (decrementa)
+                    const newLikes = Math.max(0, currentLikes - 1);
+                    await setDoc(likeDocRef, { likes: newLikes });
+
+                    localStorage.removeItem(storageKey);
+                    if (btn) btn.classList.remove('liked');
+                    if (icon) {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                    }
+                } else {
+                    // Adiciona a curtida (incrementa)
+                    if (!docSnap.exists()) {
+                        await setDoc(likeDocRef, { likes: 1 });
+                    } else {
+                        await updateDoc(likeDocRef, { likes: increment(1) });
+                    }
+
+                    localStorage.setItem(storageKey, 'true');
+                    if (btn) btn.classList.add('liked');
+                    if (icon) {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                    }
+                }
+            } catch (e) {
+                console.error("Erro ao atualizar curtida:", e);
+            }
+        };
+
+        // --- COMENTÁRIOS E MODERAÇÃO ---
+        const commentsRef = collection(db, pageId + "Comments");
+        
+        onSnapshot(query(commentsRef, orderBy("timestamp", "desc")), (snapshot) => {
+            const list = document.getElementById('commentList');
+            const user = JSON.parse(localStorage.getItem('zindub_user'));
+            
+            if(!list) return;
+            list.innerHTML = "";
+            document.getElementById('commentCount').innerText = snapshot.docs.length;
+
+            snapshot.forEach((docSnap) => {
+                const comment = docSnap.data();
+                const isAdmin = user && user.email === ADMIN_EMAIL;
+                const avatarImg = comment.avatar || 'https://via.placeholder.com/40';
+
+                list.innerHTML += `
+                    <div class="comment-item" style="display:flex; justify-content:space-between; align-items:center;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <img src="${avatarImg}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                            <div>
+                                <strong style="display:block; color:#f3f3f3;">${comment.name}</strong>
+                                <span style="color:#b3b3b3;">${comment.text}</span>
+                            </div>
+                        </div>
+                        ${isAdmin ? `<div style="display:flex; gap:10px;">
+                            <button onclick="window.editar('${docSnap.id}', '${comment.text}')" style="cursor:pointer; background:none; border:none; color:white;" title="Editar">✏️</button>
+                            <button onclick="window.apagar('${docSnap.id}')" style="cursor:pointer; background:none; border:none; color:red;" title="Apagar">🗑️</button>
+                        </div>` : ''}
+                    </div>`;
+            });
+        });
+
+        window.apagar = async (id) => {
+            if(confirm("Apagar este comentário?")) {
+                try {
+                    await deleteDoc(doc(db, pageId + "Comments", id));
+                } catch (e) {
+                    alert("Erro ao apagar: Permissão negada.");
+                }
+            }
+        };
+
+        window.editar = async (id, txt) => {
+            const novo = prompt("Editar comentário:", txt);
+            if(novo) {
+                try {
+                    await updateDoc(doc(db, pageId + "Comments", id), { text: novo });
+                } catch (e) {
+                    alert("Erro ao editar: Permissão negada.");
+                }
+            }
+        };
+
+        window.addComment = async () => {
+            const user = JSON.parse(localStorage.getItem('zindub_user'));
+            const input = document.getElementById('commentInput');
+            
+            if (!user) {
+                alert("Você precisa estar logado para comentar!");
+                return;
+            }
+
+            if (input && input.value.trim() !== "") {
+                try {
+                    await addDoc(commentsRef, { 
+                        name: user.name || "Usuário", 
+                        avatar: user.avatar || '', 
+                        text: input.value, 
+                        timestamp: serverTimestamp() 
+                    });
+                    input.value = "";
+                } catch (e) {
+                    console.error("Erro ao enviar comentário:", e);
+                }
+            }
+        };
+
+        window.handleEnter = (event) => { 
+            if (event.key === 'Enter') window.addComment(); 
+        };
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

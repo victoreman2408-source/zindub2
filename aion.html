@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos Parceiros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #040D12;
+            --text-color: #f3f3f3;
+            --accent-color: #C63C51;
+            --gray-light: #b3b3b3;
+            --gray-dark: #2b2b2b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; text-decoration: none; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; }
+        .app-container { width: 100%; max-width: 480px; min-height: 100vh; background-color: var(--bg-color); position: relative; }
+
+        .content { padding: 20px; }
+        
+        /* Ajuste do item de lista */
+        .episode-list-item { display: flex; align-items: center; gap: 15px; margin-top: 30px; color: #fff; }
+        .ep-thumbnail { width: 130px; height: 75px; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; }
+        .ep-info h4 { font-size: 14px; color: var(--text-color); }
+
+        /* Botão Voltar */
+        .back-to-top-container { text-align: center; padding: 40px 0; }
+        .btn-top {
+            background: none;
+            border: 1px solid var(--gray-dark);
+            color: var(--gray-light);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn-top:hover { border-color: var(--accent-color); color: var(--text-color); }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="content">
+            
+            <div class="episode-list-item">
+    <div class="ep-thumbnail" style="background-image: url('Imagens/1782948433767.png'); background-size: cover; background-position: center;">
+    </div>
+    
+    <div class="ep-info">
+        <h4>Disponível em breve</h4>
+        <p>Aguarde novidades</p>
+    </div>
+</div>
+
+            <div class="back-to-top-container">
+                <a href="projetos.html" class="btn-top">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para projetos
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body><script src="js/auth.js"></script>
+</html>

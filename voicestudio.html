@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parceiros | Zindub Fandub</title>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="shortcut icon" href="https://images-ext-1.discordapp.net/external/05RobE2qnFmwWWe283iNCsDVLzo1xZspKxpcgvc5zAY/https/i.imgur.com/XWlaPplh.jpg?format=webp&width=930&height=930"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Monoton&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+<style>
+    .partners-container { max-width: 1000px; margin: 100px auto 50px auto; padding: 0 20px; font-family: 'Poppins', sans-serif; }
+    .main-display { background: #0b161d; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .video-frame { width: 100%; aspect-ratio: 16/9; background: #000; }
+    .video-frame video { width: 100%; height: 100%; }
+    video::-webkit-media-controls-download-button { display: none !important; }
+    .video-meta { padding: 20px; }
+    .video-meta h2 { color: #f3f3f3; font-size: 1.5rem; font-weight: 700; }
+    .video-meta span { color: #C63C51; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+    
+    .interactions-wrapper { margin-top: 30px; padding-top: 20px; border-top: 1px solid #2b2f38; }
+    /* Botão com animação e efeito toggle */
+    .like-btn { background-color: #2b2f38; color: #f3f3f3; border: none; padding: 10px 20px; border-radius: 20px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; margin-bottom: 30px; }
+    .like-btn.liked { background-color: #e70634 !important; transform: scale(1.05); }
+    
+    .comments-area h3 { font-size: 18px; margin-bottom: 15px; font-weight: 500; color: #f3f3f3; }
+    .comment-input-group { display: flex; gap: 10px; margin-bottom: 25px; }
+    .comment-input-group input { flex: 1; padding: 12px 15px; border-radius: 20px; border: none; background-color: #2b2f38; color: white; outline: none; font-family: 'Poppins', sans-serif; }
+    .comment-input-group button { background-color: #e70634; color: white; border: none; padding: 0 25px; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; transition: 0.2s; }
+    .comment-list { display: flex; flex-direction: column; gap: 15px; }
+    .comment-item { background-color: #1a1c23; padding: 15px; border-radius: 10px; font-size: 14px; color: #b3b3b3; border: 1px solid #2b2f38; }
+    .comment-item strong { color: #f3f3f3; display: block; margin-bottom: 5px; font-weight: 500; }
+
+    .partners-list { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .partner-item { display: flex; align-items: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); text-decoration: none; transition: 0.3s; cursor: pointer; }
+    .partner-item:hover { background: rgba(198, 60, 81, 0.1); border-color: #C63C51; }
+    .partner-thumb { width: 80px; height: 45px; background: #111; border-radius: 5px; margin-right: 15px; flex-shrink: 0; overflow: hidden; }
+    .partner-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .partner-info h4 { color: #f3f3f3; font-size: 0.9rem; font-weight: 500; }
+    @media(max-width: 768px) { .partners-list { grid-template-columns: 1fr; } }
+</style>
+</head>
+
+<body>
+
+    <nav class="navigation">
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon"><span class="nav-icon"></span></label>
+        <a href="index.html" class="logo">Zindub<span>Fandub</span></a>
+        <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="parceiros.html">Projetos Parceiros</a></li>
+        </ul>
+    </nav>
+
+    <main class="partners-container">
+        <div class="main-display">
+            <div class="video-frame">
+                <video id="m-video" controls controlsList="nodownload" oncontextmenu="return false;">
+                    <source id="video-source" src="https://archive.org/download/BAKUTEN/Promised01.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-meta">
+                <span>Destaque da Comunidade</span>
+                <h2 id="video-title">The Promised Neverland Episódio 1 Fandublado</h2>
+            </div>
+
+            <div class="interactions-wrapper">
+                <button id="likeButton" class="like-btn" onclick="toggleLike()">
+                    <i class="fa-regular fa-heart" id="likeIcon"></i> <span id="likeCount">0</span> Curtidas
+                </button>
+                <div class="comments-area">
+                    <h3>Comentários (<span id="commentCount">0</span>)</h3>
+                    <div class="comment-input-group">
+                        <input type="text" id="commentInput" placeholder="Adicione um comentário..." onkeypress="handleEnter(event)">
+                        <button onclick="addComment()">Enviar</button>
+                    </div>
+                    <div id="commentList" class="comment-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="partners-list">
+            <a class="partner-item" onclick="changeVideo('https://archive.org/download/BAKUTEN/BAKUTEN.mp4', 'Bakuten Fandublado', 'bakuten')">
+                <div class="partner-thumb"><img src="Imagens/bakuten.jpg"></div>
+                <div class="partner-info"><h4>Bakuten Episódio 1 Fandublado</h4></div>
+            </a>
+            <a class="partner-item" onclick="changeVideo('https://archive.org/download/BAKUTEN/Promised01.mp4', 'The Promised Neverland Fandublado', 'promised-neverland')">
+                <div class="partner-thumb"><img src="Imagens/thepromissed.jpg"></div>
+                <div class="partner-info"><h4>The Promised Neverland Episódio 1 Fandublado</h4></div>
+            </a>
+        </section>
+    </main>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, updateDoc, setDoc, increment, collection, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyBPaNeovud2uYjIcNEdLkNsSl4YMjKp_Xw", authDomain: "zindub-e2ff7.firebaseapp.com", projectId: "zindub-e2ff7", storageBucket: "zindub-e2ff7.firebasestorage.app", messagingSenderId: "169563902252", appId: "1:169563902252:web:5c7e2c215189c6b1e61c89", measurementId: "G-3D22LE4B0K" };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Pegamos o ID do vídeo da URL ou definimos um padrão
+    const params = new URLSearchParams(window.location.search);
+    const pageId = params.get('v') || 'bakuten'; // ID padrão se não houver um
+
+    const likeDocRef = doc(db, "stats", pageId);
+    const commentsRef = collection(db, pageId + "Comments");
+
+    // --- LÓGICA DE CURTIDAS ---
+    let hasLiked = localStorage.getItem(pageId + 'HasLiked') === 'true';
+    const likeBtn = document.getElementById('likeButton');
+    const likeIcon = document.getElementById('likeIcon');
+    
+    if(hasLiked) { likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid'); }
+
+    onSnapshot(likeDocRef, (docSnap) => { 
+        if (docSnap.exists()) { document.getElementById('likeCount').innerText = docSnap.data().likes; }
+    });
+
+    window.toggleLike = async function() {
+        if (!hasLiked) {
+            hasLiked = true; localStorage.setItem(pageId + 'HasLiked', 'true');
+            likeBtn.classList.add('liked'); likeIcon.classList.replace('fa-regular', 'fa-solid');
+            await updateDoc(likeDocRef, { likes: increment(1) });
+        } else {
+            hasLiked = false; localStorage.setItem(pageId + 'HasLiked', 'false');
+            likeBtn.classList.remove('liked'); likeIcon.classList.replace('fa-solid', 'fa-regular');
+            await updateDoc(likeDocRef, { likes: increment(-1) });
+        }
+    };
+
+    // --- COMENTÁRIOS ---
+    onSnapshot(query(commentsRef, orderBy("timestamp", "desc")), (snapshot) => {
+        const list = document.getElementById('commentList');
+        document.getElementById('commentCount').innerText = snapshot.docs.length;
+        list.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+            const comment = docSnap.data();
+            list.innerHTML += `
+                <div class="comment-item">
+                    <img src="${comment.avatar}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; float:left; margin-right:10px;">
+                    <strong>${comment.name}</strong>
+                    ${comment.text}
+                </div>`;
+        });
+    });
+
+    window.addComment = async function() {
+        const user = JSON.parse(localStorage.getItem('zindub_user'));
+        if (!user) return alert("Finalize seu perfil primeiro!");
+        const input = document.getElementById('commentInput');
+        if (input.value.trim()) {
+            await addDoc(commentsRef, { name: user.name, avatar: user.avatar, text: input.value, timestamp: serverTimestamp() });
+            input.value = "";
+        }
+    };
+    window.handleEnter = (e) => { if(e.key === 'Enter') window.addComment(); };
+</script>
+</body><script src="js/auth.js"></script>
+</html>

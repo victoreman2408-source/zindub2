@@ -1,0 +1,556 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zindub Web TV</title>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+<link rel="shortcut icon" href="https://images-ext-1.discordapp.net/external/05RobE2qnFmwWWe283iNCsDVLzo1xZspKxpcgvc5zAY/https/i.imgur.com/XWlaPplh.jpg?format=webp&width=930&height=930"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <div id="progress">
+        <span id="progress-value"></span>
+    </div>
+
+    <nav class="navigation">
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+
+        <a href="index.html" class="logo">
+            Zindub<span>Fandub</span>
+        </a>
+
+        <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Filmes</a></li>
+            <li><a href="series.html">Séries</a></li>
+            <li><a href="videoscurtos.html">Videos curtos</a></li>
+            <li><a href="ao-vivo.html">Zindub TV</a></li>
+            <li><a href="contato.html">Sobre e Contato</a></li>
+            <li><a href="anuncio.html">Anúncios</a></li>
+            <li><a href="parceiros.html">Projetos Parceiros</a></li>
+        </ul>
+
+
+    </nav>
+    <style>
+        :root {
+            --cor-live: #ff0000;
+            --cor-destaque: #e70634;
+            --fundo-site: #121212;
+            --fundo-card: #1e1e1e;
+            --texto-claro: #ffffff;
+            --texto-cinza: #b0b3b8;
+        }
+
+        body { 
+            background: var(--fundo-site); 
+            color: var(--texto-claro); 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 { text-align: center; margin-top: 40px; }
+
+        /* =========================================
+            CARD DE ANÚNCIO (ESTILO FACEBOOK)
+        ========================================= */
+        .zindub-ad {
+            background: var(--fundo-card);
+            border: 1px solid #333;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ad-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .ad-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid var(--cor-destaque);
+        }
+
+        .ad-info { display: flex; flex-direction: column; }
+        .ad-title { color: var(--texto-claro); font-weight: 600; font-size: 16px; }
+        .ad-label { color: var(--texto-cinza); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .ad-body { padding: 20px; color: #e4e6eb; font-size: 15px; line-height: 1.6; }
+
+        .ad-content { width: 100%; background: #000; }
+        .ad-content video { width: 100%; display: block; max-height: 450px; object-fit: contain; }
+
+        .ad-footer-cta {
+            background: #242526;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .ad-footer-cta:hover { background: #3a3b3c; }
+
+        .cta-text h4 { margin: 0; color: var(--texto-claro); font-size: 15px; }
+        .cta-text span { color: var(--texto-cinza); font-size: 12px; }
+
+        .cta-button {
+            background: var(--cor-destaque);
+            color: var(--texto-claro);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        /* =========================================
+            PLAYER DA TV
+        ========================================= */
+        .player-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #000;
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #tvPlayer { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            pointer-events: none;
+        }
+        
+        #tvPlayer::-webkit-media-controls { display:none !important; }
+
+        .tv-logo {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 90px;
+            opacity: 0.9;
+            z-index: 15;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.8));
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--cor-live);
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot { width: 8px; height: 8px; background: white; border-radius: 50%; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .click-area {
+            position: absolute;
+            inset: 0;
+            z-index: 19;
+            cursor: pointer;
+        }
+
+        .custom-controls {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0; 
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+        
+        .custom-controls.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .volume-box { display: flex; align-items: center; gap: 12px; }
+        
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--cor-destaque);
+            cursor: pointer;
+        }
+
+        .right-side-controls { display: flex; align-items: center; gap: 18px; }
+
+        .player-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        #qualitySelect {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 3px 8px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+        }
+        .play-icon { font-size: 60px; margin-bottom: 10px; }
+
+        /* =========================================
+            ESTILO DA GRADE DE PROGRAMAÇÃO
+        ========================================= */
+        .grade-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--fundo-card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+
+        .grade-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--cor-destaque);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grade-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .grade-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #444;
+        }
+
+        .grade-item.agora {
+            border-left-color: var(--cor-live);
+            background: rgba(255,0,0,0.1);
+        }
+
+        .prog-hora { font-weight: bold; color: var(--cor-destaque); }
+        .prog-nome { font-weight: 500; color: #fff; }
+    </style>
+</head>
+<body>
+
+
+    <h2>Zindub TV</h2>
+
+    <div class="player-container" id="playerWrap">
+        <div class="click-area" id="clickArea"></div>
+
+        <img src="Imagens/Blue_and_Yellow_Modern_Multimedia_TV_Podcast_Play_Logo_20260217_233439_0000.png" class="tv-logo" alt="Logo TV">
+
+        <div class="overlay" id="btnIniciar">
+            <div class="play-icon">📺</div>
+            <p>CLIQUE PARA ASSISTIR AO VIVO</p>
+        </div>
+
+        <div class="live-indicator">
+            <div class="dot"></div> AO VIVO
+        </div>
+
+        <video id="tvPlayer" playsinline muted></video>
+
+        <div class="custom-controls" id="customControls">
+            <div class="volume-box">
+                <span id="volIcon">🔊</span>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1">
+            </div>
+
+            <div class="right-side-controls">
+                <select id="qualitySelect">
+                    <option value="1080">1080p</option>
+                    <option value="720" selected>720p</option>
+                    <option value="480">480p</option>
+                    <option value="360">360p</option>
+                    <option value="144">144p</option>
+                </select>
+
+                <button class="player-btn" id="castBtn" title="Transmitir para TV">
+                    <i class="fas fa-tv"></i>
+                </button>
+
+                <button class="player-btn" id="fullScreenBtn">⛶</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="grade-container">
+        <div class="grade-header">
+            <i class="fas fa-calendar-day" style="color: var(--cor-destaque)"></i>
+            <h3>Manhã(Metal Heroes) Em breve</h3>
+        </div>
+        <div class="grade-list">
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item agora">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+        </div>
+    </div>
+
+     <div class="grade-container">
+        <div class="grade-header">
+            <i class="fas fa-calendar-day" style="color: var(--cor-destaque)"></i>
+            <h3>Tarde(Super Sentais)</h3>
+        </div>
+        <div class="grade-list">
+            <div class="grade-item">
+                <span class="prog-hora">Em breve</span>
+                <span class="prog-nome">Filmes Super Sentais</span>
+            </div>
+            <div class="grade-item agora">
+                <span class="prog-hora">Em breve</span>
+                <span class="prog-nome">Maratona de Epsódios Super Sentais</span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora">Em breve</span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora">Em breve</span>
+                <span class="prog-nome"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grade-container">
+        <div class="grade-header">
+            <i class="fas fa-calendar-day" style="color: var(--cor-destaque)"></i>
+            <h3>Noite(Sessão de Filmes)</h3>
+        </div>
+        <div class="grade-list">
+            <div class="grade-item">
+                <span class="prog-hora"></span> 
+                <span class="prog-nome"></span> 
+            </div>
+            <div class="grade-item agora">
+                <span class="prog-hora"></span>19:00
+                <span class="prog-nome"></span> Mirai Filme Dublado HD
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span> 20:35
+                <span class="prog-nome"></span> Zootopia 2 Dublado HD
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span>22:22
+                <span class="prog-nome"></span>Kung Fu Panda 4 Dublado HD
+            </div>
+        </div>
+    </div>
+
+    <div class="grade-container">
+        <div class="grade-header">
+            <i class="fas fa-calendar-day" style="color: var(--cor-destaque)"></i>
+            <h3>Madrugada(Sessão de Filmes) Em breve</h3>
+        </div>
+        <div class="grade-list">
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item agora">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+            <div class="grade-item">
+                <span class="prog-hora"></span>
+                <span class="prog-nome"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const grade = [
+            { hora: "13:00", src: "vinhetas/estacomecando13h.mp4", duration: 11 }, 
+            { hora: "13:00:12", src: "https://archive.org/download/girls-introble-filme-completo-dublado-hd-720p-medium-fr-30/girls_introble_filme_completo_dublado__HD%20720p_MEDIUM_FR30.mp4", duration: 3352 },
+            { hora: "13:56:04", src: "vinhetas/batlhefever.mp4", duration: 188 }, 
+            { hora: "13:59:12", src: "filmes/batlhefever.mp4", duration: 1380 }, 
+            { hora: "14:22:56", src: "vinhetas/goglev.mp4", duration: 188 }, 
+            { hora: "14:26:04", src: "filmes/goglev.mp4", duration: 1716 }, 
+            { hora: "14:54:40", src: "vinhetas/abaranger.mp4", duration: 60 },  
+            { hora: "14:55:40", src: "https://ia600604.us.archive.org/19/items/batlhefever/ABARANGEREP18.mp4", duration: 1512 },
+            { hora: "15:19:52", src: "vinhetas/apoderosa.mp4", duration: 62 },  
+            { hora: "15:20:52", src: "https://archive.org/download/a-poderosa-batalha/a%20poderosa%20batalha%20.mp4", duration: 1434 },
+            { hora: "15:44:56", src: "vinhetas/dai26.mp4", duration: 155 },     
+            { hora: "15:47:56", src: "https://ia802805.us.archive.org/28/items/ep-27_202602/dairanger%20ep%2026%20dublado.mp4", duration: 1197 },
+            { hora: "16:07:53", src: "vinhetas/dai27.mp4", duration: 155 },      
+            { hora: "16:10:53", src: "https://archive.org/download/ep-27_202602/ep%2027.mp4", duration: 1346 }, 
+            { hora: "16:30:51", src: "vinhetas/gaoranger.mp4", duration: 155 }, 
+            { hora: "16:34", src: "filmes/GAORANGER24.mp4", duration: 1445 },  
+            { hora: "19:00", src: "filmes/mirai.mp4", duration: 5875 },   
+            { hora: "20:35", src: "filmes/zooto.mp4", duration: 6458 },   
+            { hora: "22:22:38", src: "filmes/panda.mp4", duration: 6458 },   
+        ];
+
+        const video = document.getElementById('tvPlayer');
+        const btnIniciar = document.getElementById('btnIniciar');
+        const clickArea = document.getElementById('clickArea');
+        const customControls = document.getElementById('customControls');
+        let controlTimer;
+
+        function toggleControls() {
+            customControls.classList.add('show');
+            clearTimeout(controlTimer);
+            controlTimer = setTimeout(() => {
+                customControls.classList.remove('show');
+            }, 3000);
+        }
+
+        clickArea.addEventListener('click', toggleControls);
+
+        function atualizarTV() {
+            const agora = new Date();
+            const segundosDesdeMeiaNoite = (agora.getHours() * 3600) + (agora.getMinutes() * 60) + agora.getSeconds();
+            let videoAtual = null;
+            let tempoDeInicio = 0;
+
+            for (let i = 0; i < grade.length; i++) {
+                const prog = grade[i];
+                const [h, m] = prog.hora.split(':').map(Number);
+                const inicioEmSegundos = (h * 3600) + (m * 60);
+                const fimEmSegundos = inicioEmSegundos + prog.duration;
+
+                if (segundosDesdeMeiaNoite >= inicioEmSegundos && segundosDesdeMeiaNoite < fimEmSegundos) {
+                    videoAtual = prog.src;
+                    tempoDeInicio = segundosDesdeMeiaNoite - inicioEmSegundos;
+                    break;
+                }
+            }
+
+            if (videoAtual) {
+                if (!video.src.includes(videoAtual)) {
+                    video.src = videoAtual;
+                    video.currentTime = tempoDeInicio;
+                    video.play().catch(e => console.log("Erro ao dar play"));
+                } else {
+                    if (Math.abs(video.currentTime - tempoDeInicio) > 3) {
+                        video.currentTime = tempoDeInicio;
+                    }
+                }
+            }
+        }
+
+        btnIniciar.addEventListener('click', () => {
+            btnIniciar.style.display = 'none';
+            video.muted = false;
+            atualizarTV();
+            setInterval(atualizarTV, 5000);
+            toggleControls();
+        });
+
+        document.getElementById('volumeSlider').addEventListener('input', (e) => video.volume = e.target.value);
+        document.getElementById('fullScreenBtn').addEventListener('click', () => {
+            const wrap = document.getElementById('playerWrap');
+            if (!document.fullscreenElement) wrap.requestFullscreen(); else document.exitFullscreen();
+        });
+
+        document.getElementById('castBtn').addEventListener('click', () => {
+            if (video.remote && video.remote.state !== 'disconnected') video.remote.prompt();
+            else alert("Buscando dispositivos...");
+        });
+    </script>
+</body><script src="js/auth.js"></script>
+</html>

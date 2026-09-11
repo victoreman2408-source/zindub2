@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Zindub</title>
+</head>
+<body>
+    <button id="btnGoogle">Acessar com Google</button>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const provider = new GoogleAuthProvider();
+        document.getElementById('btnGoogle').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const docRef = doc(db, "acessos", result.user.email);
+                const snap = await getDoc(docRef);
+
+                if (snap.exists()) {
+                    window.location.href = "pagina_secreta.html";
+                } else {
+                    alert("Acesso negado: E-mail não autorizado.");
+                }
+            } catch (error) { alert("Erro: " + error.message); }
+        });
+    </script>
+</body>
+</html>

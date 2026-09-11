@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZINDUB Anuncios</title>
+
+<link rel="stylesheet" href="css/style.css"/>
+
+<link rel="shortcut icon" href="https://images-ext-1.discordapp.net/external/05RobE2qnFmwWWe283iNCsDVLzo1xZspKxpcgvc5zAY/https/i.imgur.com/XWlaPplh.jpg?format=webp&width=930&height=930"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <div id="progress">
+        <span id="progress-value"></span>
+    </div>
+
+    <nav class="navigation">
+
+        <input type="checkbox" class="menu-btn" id="menu-btn">
+        <label for="menu-btn" class="menu-icon">
+            <span class="nav-icon"></span>
+        </label>
+
+
+        <a href="index.html" class="logo">
+            Zindub<span>Fandub</span>
+        </a>
+
+        <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="filmes.html">Filmes</a></li>
+            <li><a href="series.html">Séries</a></li>
+            <li><a href="videoscurtos.html">Videos curtos</a></li>
+            <li><a href="ao-vivo.html">Zindub TV</a></li>
+            <li><a href="contato.html">Sobre e Contato</a></li>
+            <li><a href="anuncio.html">Anúncios</a></li>
+            <li><a href="parceiros.html">Projetos Parceiros</a></li>
+        </ul>
+
+
+    </nav>
+    <style>
+        :root {
+            --cor-live: #ff0000;
+            --cor-destaque: #e70634;
+            --fundo-site: #121212;
+            --fundo-card: #1e1e1e;
+            --texto-claro: #ffffff;
+            --texto-cinza: #b0b3b8;
+        }
+
+        body { 
+            background: var(--fundo-site); 
+            color: var(--texto-claro); 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 { text-align: center; margin-top: 40px; }
+
+        /* --- BLOCO PARA REMOVER DOWNLOAD --- */
+        video::-webkit-media-controls-download-button {
+            display: none !important;
+        }
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden !important;
+        }
+        video::-internal-media-controls-download-button {
+            display: none !important;
+        }
+        /* ---------------------------------- */
+
+        .zindub-ad {
+            background: var(--fundo-card);
+            border: 1px solid #333;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ad-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .ad-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid var(--cor-destaque);
+        }
+
+        .ad-info { display: flex; flex-direction: column; }
+        .ad-title { color: var(--texto-claro); font-weight: 600; font-size: 16px; }
+        .ad-label { color: var(--texto-cinza); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .ad-body { padding: 20px; color: #e4e6eb; font-size: 15px; line-height: 1.6; }
+
+        .ad-content { width: 100%; background: #000; }
+        .ad-content video { width: 100%; display: block; max-height: 450px; object-fit: contain; }
+
+        .ad-footer-cta {
+            background: #242526;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .ad-footer-cta:hover { background: #3a3b3c; }
+
+        .cta-text h4 { margin: 0; color: var(--texto-claro); font-size: 15px; }
+        .cta-text span { color: var(--texto-cinza); font-size: 12px; }
+
+        .cta-button {
+            background: var(--cor-destaque);
+            color: var(--texto-claro);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+    </style>
+
+    <h2>Anúncios Oficiais</h2>
+
+    <div class="zindub-ad">
+        <div class="ad-header">
+            <img src="https://i.imgur.com/XWlaPplh.jpg" class="ad-logo" alt="Logo">
+            <div class="ad-info">
+                <span class="ad-title">Zindub Fandub</span>
+                <span class="ad-label">Anúncio Oficial • Em Breve</span>
+            </div>
+        </div>
+
+        <div class="ad-body">
+            🔥 <strong>NOVIDADE CHEGANDO!</strong><br>
+            Ninja Sentai Kakuranger Aniversário de 30 anos!
+        </div>
+
+        <div class="ad-content">
+            <video controls controlsList="nodownload" oncontextmenu="return false;">
+                <source src="vinhetas/trailerkaku.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <a href="kakuranger.html" class="ad-footer-cta">
+            <div class="cta-text">
+                <span></span>
+                <h4>Saiba mais</h4>
+            </div>
+            <div class="cta-button">Ver</div>
+        </a>
+    </div>
+
+    <div class="zindub-ad">
+        <div class="ad-header">
+            <img src="https://i.imgur.com/XWlaPplh.jpg" class="ad-logo" alt="Logo">
+            <div class="ad-info">
+                <span class="ad-title">Zindub Fandub</span>
+                <span class="ad-label">Anúncio Oficial • Em Breve</span>
+            </div>
+        </div>
+
+        <div class="ad-body">
+            🔥 <strong>NOVIDADE CHEGANDO!</strong><br>
+            Dragon ball Daima!
+        </div>
+
+        <div class="ad-content">
+            <video controls controlsList="nodownload" oncontextmenu="return false;">
+                <source src="filmes/trailerdragondaima.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <a href="dragonballdaima.html" class="ad-footer-cta">
+            <div class="cta-text">
+                <span></span>
+                <h4>Saiba mais</h4>
+            </div>
+            <div class="cta-button">Ver</div>
+        </a>
+    </div>
+
+    <div class="zindub-ad">
+        <div class="ad-header">
+            <img src="https://i.imgur.com/XWlaPplh.jpg" class="ad-logo" alt="Logo">
+            <div class="ad-info">
+                <span class="ad-title">Zindub Fandub</span>
+                <span class="ad-label">Anúncio Oficial • Já disponível</span>
+            </div>
+        </div>
+
+        <div class="ad-body">
+            🔥 <strong>NOVIDADE!</strong><br>
+            Chojuu Sentai Liveman
+        </div>
+
+        <div class="ad-content">
+            <video controls controlsList="nodownload" oncontextmenu="return false;">
+                <source src="filmes/trailerliveman.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <a href="liveman.html" class="ad-footer-cta">
+            <div class="cta-text">
+                <span></span>
+                <h4>Saiba mais</h4>
+            </div>
+            <div class="cta-button">Ver</div>
+        </a>
+    </div>
+
+
+    <footer>
+        <a href="index.html" class="logo">
+            Zindub<span>Fandub</span>
+        </a>
+        <span class="copyright">
+             Desde 2021 - Todos os direitos reservados aos donos das obras. Sem fins lucrativos.
+        </span>
+    </footer>
+
+
+    <script src="js/jQuery.js"></script>
+
+
+    <script>
+        /*==scroll-progress-bar======================*/
+        let scrollPrecentage = () =>{
+            let scrollProgress = document.getElementById("progress");
+            let progressValue = document.getElementById("progress-value");
+            let pos = document.documentElement.scrollTop;
+            let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrollValue = Math.round(pos * 100 / calcHeight);
+            scrollProgress.style.background = `conic-gradient(#e70634 ${scrollValue}%, #2b2f38 ${scrollValue}%)`;
+        }
+        window.onscroll = scrollPrecentage;
+        window.onload = scrollPrecentage;
+
+
+        /*--menu-btn-fixed-when-scroll============*/
+        $(window).scroll(function(){
+            if($(document).scrollTop() > 20){
+                $('.navigation').addClass('fix-icon');
+            }
+            else{
+                $('.navigation').removeClass('fix-icon');
+            }
+        });
+
+        /*==popup-open==================================*/
+        $(document).on('click','.play-btn a',function(){
+            $('.play').addClass('active-popup');
+        });
+        /*==popup-Close==================================*/
+        $(document).on('click','.close-movie',function(){
+            $('.play').removeClass('active-popup');
+        });
+        /*==auto-play-when-popup-open===================*/
+        $('.play-btn a').click(function(){
+            $('#m-video')[0].play();
+        });
+        /*==Close-video-when-poppup-close==============*/
+        $('.close-movie').click(function(){
+            $('#m-video')[0].pause();
+        });
+
+      </script>
+
+
+</body>
+
+</html>
